@@ -1,0 +1,14 @@
+.navbar {
+    border-bottom: 2px solid #6e42ca;
+}
+
+.btn-github {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+.btn-github:hover {
+    background-color: #111;
+    color: white;
+}
