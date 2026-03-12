@@ -40,3 +40,14 @@
     margin-bottom: 24px;
     max-width: 360px;
 }
+
+.btn-notfound {
+    background-color: #6e42ca;
+    color: white;
+    border: none;
+}
+
+.btn-notfound:hover {
+    background-color:#5a32b0 ;
+    color: white;
+}

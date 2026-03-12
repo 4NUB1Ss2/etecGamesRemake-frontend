@@ -12,3 +12,14 @@
     background-color: #111;
     color: white;
 }
+
+.btn-login{
+    background-color: #6e42ca;
+    color: white;
+    border: none;
+}
+
+.btn-login:hover {
+    background-color:#5a32b0 ;
+    color: white;
+}
