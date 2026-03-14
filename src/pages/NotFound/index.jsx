@@ -17,7 +17,7 @@ function NotFound() {
             <p className="notfound-subtitle">
                 A página que você está procurando não existe ou foi removida.
             </p>
-            <button type={"button"} className="btn btn-primary px-4" onClick={() => navigate("/")}>
+            <button type={"button"} className="btn btn-notfound px-4" onClick={() => navigate("/")}>
                 Voltar para o ínicio
             </button>
         </div>
