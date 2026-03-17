@@ -17,7 +17,7 @@ function Index() {
     async function getUser() {
         try {
             const response = await api.get(`/users/${username}`)
-            setUser(response.data)
+            setUser(response.data.user)
         } catch {
             navigate('/404')
         }
@@ -129,7 +129,7 @@ function Index() {
                         <GameList
                             title=""
                             section="last"
-                            userId={user.id}
+                            username={user.username}
                             emptyMessage="Sem nenhum jogo ainda"
                         />
                     </div>
