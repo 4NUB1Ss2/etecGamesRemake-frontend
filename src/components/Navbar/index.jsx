@@ -1,4 +1,5 @@
 import { FaGithub } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
@@ -8,11 +9,25 @@ export default function Navbar() {
 
     const { isLoggedIn, logout } = useAuth()
     const navigate = useNavigate()
+    const [me, setMe] = useState(null)
 
-    async function me(){
-        const res = await api.get('/me')
-        console.log(res.data)
-    }
+    useEffect(() => {
+        console.log('useEffect rodou, isLoggedIn:', isLoggedIn)
+        if(isLoggedIn) {
+           api.get('/me')
+               .then(res => {
+
+                   console.log(res.data)
+                   setMe(res.data)
+               })
+               .catch(err => console.log('erro no me', err))
+        }else{
+            setMe(null)
+        }
+
+    }, [isLoggedIn])
+
+
     return (
 
 
@@ -20,7 +35,12 @@ export default function Navbar() {
             <div className="ms-auto d-flex align-items-center gap-3">
                 {isLoggedIn ? (
                     <>
-                        <button className="btn btn-login px-4" onClick={() => navigate('/profile')}>
+                        <button className="btn btn-login px-4" onClick={() =>{
+                            console.log('me no click ', me)
+                            if (me?.username) {
+                                navigate(`/profile/${me.username}`)
+                            }
+                        }}>
                             Ver Perfil
                         </button>
                         <button className="btn btn-sair px-4" onClick={logout}>

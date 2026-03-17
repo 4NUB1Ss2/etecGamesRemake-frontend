@@ -1,0 +1,152 @@
+.profile-page {
+    min-height: 100vh;
+    background-color: #212529;
+}
+
+/* HEADER */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background-color: #22243a;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6e42ca;
+}
+
+.profile-avatar-edit {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background-color: #2e3050;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.profile-avatar-edit:hover {
+    background-color: #6e42ca;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.profile-username {
+    color: #8b8fa8;
+    font-size: 0.95rem;
+}
+
+.profile-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.profile-badge {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.profile-badge-role {
+    background-color: rgba(110, 66, 202, 0.2);
+    color: #a67eec;
+    border: 1px solid rgba(110, 66, 202, 0.4);
+}
+
+.profile-badge-school {
+    background-color: rgba(58, 111, 216, 0.2);
+    color: #7aaaf5;
+    border: 1px solid rgba(58, 111, 216, 0.4);
+}
+
+.profile-edit-btn {
+    background-color: #2e3050;
+    color: #c0c4d8;
+    border: 1px solid #3d4170;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    align-self: flex-start;
+}
+
+.profile-edit-btn:hover {
+    background-color: #6e42ca;
+    color: white;
+    border-color: #6e42ca;
+}
+
+/* JOGOS */
+.profile-games-section {
+    background-color: #22243a;
+    border-radius: 16px;
+    padding: 28px 32px;
+}
+
+.profile-games-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-games-title {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profile-add-btn {
+    background-color: #6e42ca;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.profile-add-btn:hover {
+    background-color: #5a32b0;
+    color: white;
+}
+
+.profile-empty {
+    color: #8b8fa8;
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.95rem;
+}

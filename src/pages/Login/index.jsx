@@ -7,9 +7,11 @@ import './style.css'
 function Index() {
     const navigate = useNavigate()
     const { login } = useAuth()
+    const [mode, setMode] = useState('register') // 'register' | 'login'
     const [step, setStep] = useState(1)
-    const [userType, setUserType] = useState(null) // 'etec' | 'common'
+    const [userType, setUserType] = useState(null)
     const [schools, setSchools] = useState([])
+    const [error, setError] = useState(null)
     const [form, setForm] = useState({
         username: '',
         email: '',
@@ -17,6 +19,7 @@ function Index() {
         name: '',
         role: '',
         school_id: '',
+        credential: '',
     })
 
     async function getSchools() {
@@ -30,6 +33,7 @@ function Index() {
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
+        setError(null)
     }
 
     function handleTypeSelect(type) {
@@ -40,7 +44,6 @@ function Index() {
         } else {
             setStep(1.5)
         }
-
     }
 
     function handleRoleSelect(role) {
@@ -48,10 +51,8 @@ function Index() {
         setStep(2)
     }
 
-    async function handleSubmit(e) {
+    async function handleRegister(e) {
         e.preventDefault()
-
-        console.log(form.role)
 
         const data = {
             name: form.name,
@@ -65,12 +66,44 @@ function Index() {
             data.school_id = form.school_id
         }
 
-        const response = await api.post('/register', data)
-        login(response.data.token)
-        navigate('/')
+        try {
+            const response = await api.post('/register', data)
+            login(response.data.token)
+            navigate('/')
+        } catch (err) {
+            setError(err.response?.data?.message || 'Erro ao criar conta')
+        }
+    }
 
-        console.log({ ...form, type: userType })
-        // api.post('/register', { ...form, type: userType })
+    async function handleLogin(e) {
+        e.preventDefault()
+
+        try {
+            const response = await api.post('/login', {
+                credential: form.credential,
+                password: form.password,
+            })
+            login(response.data.token)
+            navigate('/')
+        } catch (err) {
+            setError('Login ou senha inválidos')
+        }
+    }
+
+    function switchMode(newMode) {
+        setMode(newMode)
+        setStep(1)
+        setError(null)
+        setUserType(null)
+        setForm({
+            username: '',
+            email: '',
+            password: '',
+            name: '',
+            role: '',
+            school_id: '',
+            credential: '',
+        })
     }
 
     return (
@@ -78,86 +111,28 @@ function Index() {
             <div className="register-card">
 
                 <div className="register-header">
-                    <h2 className="register-title">Criar Conta</h2>
+                    <h2 className="register-title">
+                        {mode === 'register' ? 'Criar Conta' : 'Entrar'}
+                    </h2>
                     <p className="register-subtitle">
-                        {step === 1 && 'Como você vai usar o EtecGames?'}
-                        {step === 1.5 && 'Qual é o seu papel na ETEC?'}
-                        {step === 2 && 'Preencha seus dados'}
+                        {mode === 'login' && 'Acesse sua conta'}
+                        {mode === 'register' && step === 1 && 'Como você vai usar o EtecGames?'}
+                        {mode === 'register' && step === 1.5 && 'Qual é o seu papel na ETEC?'}
+                        {mode === 'register' && step === 2 && 'Preencha seus dados'}
                     </p>
                 </div>
 
-                {/* STEP 1 — tipo de usuário */}
-                {step === 1 && (
-                    <div className="type-selector">
-                        <button className="type-btn" onClick={() => handleTypeSelect('etec')}>
-                            <span className="type-icon">🏫</span>
-                            <span className="type-label">Faço parte de uma ETEC</span>
-                            <span className="type-desc">Aluno ou professor</span>
-                        </button>
-                        <button className="type-btn" onClick={() => handleTypeSelect('common')}>
-                            <span className="type-icon">👤</span>
-                            <span className="type-label">Sou usuário comum</span>
-                            <span className="type-desc">Acesso geral à plataforma</span>
-                        </button>
-                    </div>
-                )}
-
-                {/* STEP 1.5 — aluno ou professor */}
-                {step === 1.5 && (
-                    <div className="type-selector">
-                        <button className="type-btn" onClick={() => handleRoleSelect('student')}>
-                            <span className="type-icon">🎒</span>
-                            <span className="type-label">Aluno</span>
-                            <span className="type-desc">Estou matriculado na ETEC</span>
-                        </button>
-                        <button className="type-btn" onClick={() => handleRoleSelect('professor')}>
-                            <span className="type-icon">📚</span>
-                            <span className="type-label">Professor</span>
-                            <span className="type-desc">Leciono na ETEC</span>
-                        </button>
-                        <button className="back-btn" onClick={() => setStep(1)}>
-                            ← Voltar
-                        </button>
-                    </div>
-                )}
-
-                {/* STEP 2 — formulário */}
-                {step === 2 && (
-                    <form onSubmit={handleSubmit} className="register-form">
+                {/* MODO LOGIN */}
+                {mode === 'login' && (
+                    <form onSubmit={handleLogin} className="register-form">
                         <div className="mb-3">
-                            <label className="form-label register-label">Nome completo</label>
+                            <label className="form-label register-label">Email ou nome de usuário</label>
                             <input
                                 type="text"
-                                name="name"
+                                name="credential"
                                 className="form-control register-input"
-                                placeholder="Seu nome"
-                                value={form.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label register-label">Nome de usuário</label>
-                            <input
-                                type="text"
-                                name="username"
-                                className="form-control register-input"
-                                placeholder="@usuario"
-                                value={form.username}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label register-label">E-mail</label>
-                            <input
-                                type="email"
-                                name="email"
-                                className="form-control register-input"
-                                placeholder="email@exemplo.com"
-                                value={form.email}
+                                placeholder="email@exemplo.com ou @usuario"
+                                value={form.credential}
                                 onChange={handleChange}
                                 required
                             />
@@ -176,61 +151,177 @@ function Index() {
                             />
                         </div>
 
-                        {userType === 'etec' && (
-                            <>
-                                <div className="mb-3">
-                                    <label className="form-label register-label">Função</label>
-                                    <select
-                                        name="role"
-                                        className="form-select register-input"
-                                        value={form.role}
-                                        onChange={handleChange}
-                                        disabled={true}
-                                        required
-                                    >
-                                        <option value="">Selecione...</option>
-                                        <option value="student">Aluno</option>
-                                        <option value="professor">Professor</option>
-                                    </select>
-                                </div>
-
-                                <div className="mb-3">
-                                    <label className="form-label register-label">Escola</label>
-                                    <select
-                                        name="school_id"
-                                        className="form-select register-input"
-                                        value={form.school_id}
-                                        onChange={handleChange}
-                                        required
-                                    >
-                                        <option value="">Selecione sua escola...</option>
-                                        {schools
-                                            .filter((school) => school.id !== 1)
-                                            .map((school) => (
-                                            <option key={school.id} value={school.id}>
-                                                {school.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </>
-                        )}
+                        {error && <div className="login-error">{error}</div>}
 
                         <button type="submit" className="btn register-submit w-100 mt-2">
-                            Criar conta
-                        </button>
-
-                        <button type="button" className="back-btn mt-2" onClick={() => setStep(userType === 'etec' ? 1.5 : 1)}>
-                            ← Voltar
+                            Entrar
                         </button>
                     </form>
                 )}
 
+                {/* MODO REGISTER */}
+                {mode === 'register' && (
+                    <>
+                        {/* STEP 1 */}
+                        {step === 1 && (
+                            <div className="type-selector">
+                                <button className="type-btn" onClick={() => handleTypeSelect('etec')}>
+                                    <span className="type-icon">🏫</span>
+                                    <span className="type-label">Faço parte de uma ETEC</span>
+                                    <span className="type-desc">Aluno ou professor</span>
+                                </button>
+                                <button className="type-btn" onClick={() => handleTypeSelect('common')}>
+                                    <span className="type-icon">👤</span>
+                                    <span className="type-label">Sou usuário comum</span>
+                                    <span className="type-desc">Acesso geral à plataforma</span>
+                                </button>
+                            </div>
+                        )}
+
+                        {/* STEP 1.5 */}
+                        {step === 1.5 && (
+                            <div className="type-selector">
+                                <button className="type-btn" onClick={() => handleRoleSelect('student')}>
+                                    <span className="type-icon">🎒</span>
+                                    <span className="type-label">Aluno</span>
+                                    <span className="type-desc">Estou matriculado na ETEC</span>
+                                </button>
+                                <button className="type-btn" onClick={() => handleRoleSelect('professor')}>
+                                    <span className="type-icon">📚</span>
+                                    <span className="type-label">Professor</span>
+                                    <span className="type-desc">Leciono na ETEC</span>
+                                </button>
+                                <button className="back-btn" onClick={() => setStep(1)}>
+                                    ← Voltar
+                                </button>
+                            </div>
+                        )}
+
+                        {/* STEP 2 */}
+                        {step === 2 && (
+                            <form onSubmit={handleRegister} className="register-form">
+                                <div className="mb-3">
+                                    <label className="form-label register-label">Nome completo</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        className="form-control register-input"
+                                        placeholder="Seu nome"
+                                        value={form.name}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="form-label register-label">Nome de usuário</label>
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        className="form-control register-input"
+                                        placeholder="@usuario"
+                                        value={form.username}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="form-label register-label">E-mail</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        className="form-control register-input"
+                                        placeholder="email@exemplo.com"
+                                        value={form.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="form-label register-label">Senha</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        className="form-control register-input"
+                                        placeholder="••••••••"
+                                        value={form.password}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                {userType === 'etec' && (
+                                    <>
+                                        <div className="mb-3">
+                                            <label className="form-label register-label">Função</label>
+                                            <select
+                                                name="role"
+                                                className="form-select register-input"
+                                                value={form.role}
+                                                onChange={handleChange}
+                                                disabled={true}
+                                                required
+                                            >
+                                                <option value="">Selecione...</option>
+                                                <option value="student">Aluno</option>
+                                                <option value="professor">Professor</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <label className="form-label register-label">Escola</label>
+                                            <select
+                                                name="school_id"
+                                                className="form-select register-input"
+                                                value={form.school_id}
+                                                onChange={handleChange}
+                                                required
+                                            >
+                                                <option value="">Selecione sua escola...</option>
+                                                {schools
+                                                    .filter((school) => school.id !== 1)
+                                                    .map((school) => (
+                                                        <option key={school.id} value={school.id}>
+                                                            {school.name}
+                                                        </option>
+                                                    ))}
+                                            </select>
+                                        </div>
+                                    </>
+                                )}
+
+                                {error && <div className="login-error">{error}</div>}
+
+                                <button type="submit" className="btn register-submit w-100 mt-2">
+                                    Criar conta
+                                </button>
+
+                                <button type="button" className="back-btn mt-2" onClick={() => setStep(userType === 'etec' ? 1.5 : 1)}>
+                                    ← Voltar
+                                </button>
+                            </form>
+                        )}
+                    </>
+                )}
+
                 <div className="register-footer">
-                    <span>Já tem uma conta?</span>
-                    <button className="login-link" onClick={() => navigate('/login')}>
-                        Entrar
-                    </button>
+                    {mode === 'register' ? (
+                        <>
+                            <span>Já tem uma conta?</span>
+                            <button className="login-link" onClick={() => switchMode('login')}>
+                                Entrar
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <span>Não tem uma conta?</span>
+                            <button className="login-link" onClick={() => switchMode('register')}>
+                                Criar conta
+                            </button>
+                        </>
+                    )}
                 </div>
 
             </div>
