@@ -1,70 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
 .profile-page {
     min-height: 100vh;
-    background-color: #212529;
+    background: #0f1117;
 }
 
-/* HEADER */
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    background-color: #22243a;
+/* ── BANNER ── */
+.profile-banner {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    background: #0d0f18;
+    margin-top: 64px;
+    border-bottom: 1px solid #1c1e2e;
+}
+
+.profile-banner-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+            linear-gradient(rgba(110, 66, 202, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(110, 66, 202, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.profile-banner-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(110, 66, 202, 0.15) 0%, transparent 60%);
+}
+
+/* ── BODY ── */
+
+.profile-body {
+    padding-bottom: 60px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── HEADER CARD ── */
+.profile-header-card {
+    background: #13151f;
+    border: 1px solid #1c1e2e;
     border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 32px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
 }
-
+/* AVATAR */
 .profile-avatar-wrapper {
     position: relative;
     flex-shrink: 0;
 }
 
 .profile-avatar {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #6e42ca;
+    border: 3px solid #0f1117;
+    outline: 3px solid #6e42ca;
+    display: block;
 }
 
 .profile-avatar-edit {
     position: absolute;
-    bottom: 4px;
-    right: 4px;
-    background-color: #2e3050;
-    border: none;
+    bottom: 2px;
+    right: 2px;
+    background: #1c1e2e;
+    border: 1px solid #2a2d3e;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    font-size: 0.75rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
 }
 
-.profile-avatar-edit:hover {
-    background-color: #6e42ca;
-}
+.profile-avatar-edit:hover { background: #6e42ca; }
 
-.profile-info {
+/* INFO */
+.profile-header-info {
     flex: 1;
+    min-width: 200px;
+}
+
+.profile-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
 }
 
 .profile-name {
-    color: #ffffff;
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f0f0f8;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
 }
 
 .profile-username {
-    color: #8b8fa8;
-    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    color: #555878;
+    font-size: 0.9rem;
 }
 
+.profile-edit-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    color: #7b7f96;
+    border: 1px solid #1c1e2e;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.profile-edit-btn:hover {
+    background: rgba(110, 66, 202, 0.12);
+    color: #f0f0f8;
+    border-color: rgba(110, 66, 202, 0.3);
+}
+
+/* BADGES */
 .profile-badges {
     display: flex;
     gap: 8px;
@@ -72,44 +144,133 @@
 }
 
 .profile-badge {
-    font-size: 0.8rem;
-    padding: 4px 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 12px;
     border-radius: 20px;
-    font-weight: 600;
 }
 
 .profile-badge-role {
-    background-color: rgba(110, 66, 202, 0.2);
+    background: rgba(110, 66, 202, 0.12);
     color: #a67eec;
-    border: 1px solid rgba(110, 66, 202, 0.4);
+    border: 1px solid rgba(110, 66, 202, 0.25);
 }
 
 .profile-badge-school {
-    background-color: rgba(58, 111, 216, 0.2);
+    background: rgba(58, 111, 216, 0.12);
     color: #7aaaf5;
-    border: 1px solid rgba(58, 111, 216, 0.4);
+    border: 1px solid rgba(58, 111, 216, 0.25);
 }
 
-.profile-edit-btn {
-    background-color: #2e3050;
-    color: #c0c4d8;
-    border: 1px solid #3d4170;
-    border-radius: 8px;
-    padding: 8px 20px;
+/* ── COMMON USER GRID ── */
+.profile-common-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+    .profile-common-grid { grid-template-columns: 1fr; }
+}
+
+.profile-common-card,
+.profile-cta-card {
+    background: #13151f;
+    border: 1px solid #1c1e2e;
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.profile-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0f0f8;
+    margin-bottom: 12px;
+}
+
+.profile-common-text {
+    font-family: 'DM Sans', sans-serif;
+    color: #555878;
     font-size: 0.9rem;
-    transition: all 0.2s;
-    align-self: flex-start;
+    line-height: 1.65;
+    margin-bottom: 16px;
 }
 
-.profile-edit-btn:hover {
-    background-color: #6e42ca;
+.profile-common-action {
+    background: none;
+    border: 1px dashed #2a2d3e;
+    color: #555878;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.profile-common-action:hover {
+    border-color: #6e42ca;
+    color: #a67eec;
+    background: rgba(110, 66, 202, 0.06);
+}
+
+/* CTA CARD */
+.profile-cta-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #13151f 0%, #16182a 100%);
+    border-color: rgba(110, 66, 202, 0.2);
+}
+
+.profile-cta-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.profile-cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0f0f8;
+    margin-bottom: 8px;
+}
+
+.profile-cta-desc {
+    font-family: 'DM Sans', sans-serif;
+    color: #555878;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.profile-cta-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(110, 66, 202, 0.12);
+    color: #a67eec;
+    border: 1px solid rgba(110, 66, 202, 0.25);
+    border-radius: 8px;
+    padding: 9px 18px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.profile-cta-btn:hover {
+    background: #6e42ca;
     color: white;
     border-color: #6e42ca;
 }
 
-/* JOGOS */
+/* ── GAMES SECTION ── */
 .profile-games-section {
-    background-color: #22243a;
+    background: #13151f;
+    border: 1px solid #1c1e2e;
     border-radius: 16px;
     padding: 28px 32px;
 }
@@ -118,35 +279,60 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
 }
 
 .profile-games-title {
-    color: #ffffff;
-    font-size: 1.3rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
     font-weight: 700;
+    color: #f0f0f8;
     margin: 0;
 }
 
 .profile-add-btn {
-    background-color: #6e42ca;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #6e42ca;
     color: white;
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: background-color 0.2s;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .profile-add-btn:hover {
-    background-color: #5a32b0;
-    color: white;
+    background: #5a32b0;
+    transform: translateY(-1px);
 }
 
-.profile-empty {
-    color: #8b8fa8;
-    text-align: center;
-    padding: 40px 0;
-    font-size: 0.95rem;
+/* ── SKELETON ── */
+.skeleton-avatar-wrap { flex-shrink: 0; }
+
+.skeleton-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #1c1e2e 25%, #22243a 50%, #1c1e2e 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-line {
+    height: 14px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #1c1e2e 25%, #22243a 50%, #1c1e2e 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin-bottom: 10px;
+}
+
+.w-48 { width: 192px; }
+.w-28 { width: 112px; }
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://api.etecgames.com.br/api',
+    baseURL: 'https://api.etecgame.com.br/api',
 })
 
 api.interceptors.request.use((config) => {
