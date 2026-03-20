@@ -1,11 +1,77 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
-body{
-  padding-top: 35px;
-  background-color: #212529;
+:root {
+  --color-bg:        #0f1117;
+  --color-surface:   #13151f;
+  --color-border:    #1c1e2e;
+  --color-purple:    #6e42ca;
+  --color-purple-lt: #a67eec;
+  --color-text:      #f0f0f8;
+  --color-muted:     #555878;
+  --color-faint:     #3a3d52;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2d3e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-purple);
+}
+
+/* Selection */
+::selection {
+  background: rgba(110, 66, 202, 0.3);
+  color: var(--color-text);
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Inputs & buttons reset */
+input, button, select, textarea {
+  font-family: var(--font-body);
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }

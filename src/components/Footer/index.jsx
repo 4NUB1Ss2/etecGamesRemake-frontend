@@ -1,47 +1,53 @@
 import './style.css'
-import {FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub} from 'react-icons/fa'
-
+import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
 
 function Index() {
     const socials = [
-        {icon: <FaFacebookF/>, color: 'btn-facebook', link: '#'},
-        {icon: <FaTwitter/>, color: 'btn-twitter', link: '#'},
-        {icon: <FaGoogle/>, color: 'btn-google', link: '#'},
-        {icon: <FaInstagram/>, color: 'btn-instagram', link: '#'},
-        {icon: <FaLinkedinIn/>, color: 'btn-linkedin', link: '#'},
-        {icon: <FaGithub/>, color: 'btn-github', link: 'https://github.com/4NUB1Ss2'},
+        { icon: <FaFacebookF />, color: '#1877f2', link: '#', label: 'Facebook' },
+        { icon: <FaTwitter />,   color: '#1da1f2', link: '#', label: 'Twitter' },
+        { icon: <FaGoogle />,    color: '#ea4335', link: '#', label: 'Google' },
+        { icon: <FaInstagram />, color: '#c13584', link: '#', label: 'Instagram' },
+        { icon: <FaLinkedinIn />,color: '#0a66c2', link: '#', label: 'LinkedIn' },
+        { icon: <FaGithub />,    color: '#e0e0e0', link: 'https://github.com/4NUB1Ss2', label: 'GitHub' },
     ]
 
     return (
-        <footer className="bg-dark text-center py-4">
-            <div className="d-flex justify-content-center gap-2 mb-3">
-                {socials.map((s, i) => (
-                    <a key={i} href={s.link} className={`btn ${s.color} btn-floating rounded-circle`}
-                       style={{
-                           width: '40px',
-                           height: '40px',
-                           display: 'flex',
-                           alignItems: 'center',
-                           justifyContent: 'center'
-                       }}
-                    >
-                        {s.icon}
+        <footer className="footer-custom">
+            <div className="footer-line" />
+            <div className="footer-inner">
+
+                <div className="footer-brand">
+                    <span className="footer-logo-bracket">[</span>
+                    ETEC<span className="footer-logo-accent">Games</span>
+                    <span className="footer-logo-bracket">]</span>
+                </div>
+
+                <div className="footer-socials">
+                    {socials.map((s, i) => (
+                        <a
+                            key={i}
+                            href={s.link}
+                            target={s.link !== '#' ? '_blank' : undefined}
+                            rel="noreferrer"
+                            className="footer-social-btn"
+                            style={{ '--social-color': s.color }}
+                            title={s.label}
+                        >
+                            {s.icon}
+                        </a>
+                    ))}
+                </div>
+
+                <p className="footer-copy">
+                    © 2026 —{' '}
+                    <a href="https://github.com/4NUB1Ss2" target="_blank" rel="noreferrer" className="footer-author">
+                        Giovanni Rohrig
                     </a>
-                ))}
+                </p>
+
             </div>
-
-            <p className="text-secondary mb-0" style={{fontSize: '14px'}}>
-                © 2026 Copyright:{' '}
-                <a href="https://github.com/4NUB1Ss2" className="text-name text-decoration-none ">
-                    Giovanni Rohrig
-                </a>
-
-
-            </p>
-
         </footer>
     )
-
 }
 
 export default Index

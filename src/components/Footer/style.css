@@ -1,63 +1,88 @@
-.btn-facebook {
-    background-color: #1877f2;
-    color: white;
-    border: none;
-}
-.btn-facebook:hover {
-    background-color: #0e5fcc;
-    color: white;
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+.footer-custom {
+    background: #0d0f18;
+    position: relative;
 }
 
-.btn-twitter {
-    background-color: #1da1f2;
-    color: white;
-    border: none;
-}
-.btn-twitter:hover {
-    background-color: #0d8fd9;
-    color: white;
+.footer-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #6e42ca, transparent);
+    opacity: 0.4;
 }
 
-.btn-google {
-    background-color: #ea4335;
-    color: white;
-    border: none;
-}
-.btn-google:hover {
-    background-color: #c62717;
-    color: white;
-}
-
-.btn-instagram {
-    background-color: #c13584;
-    color: white;
-    border: none;
-}
-.btn-instagram:hover {
-    background-color: #a12070;
-    color: white;
+.footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.btn-linkedin {
-    background-color: #0a66c2;
-    color: white;
-    border: none;
-}
-.btn-linkedin:hover {
-    background-color: #084e96;
-    color: white;
-}
-
-.btn-github {
-    background-color: #333;
-    color: white;
-    border: none;
-}
-.btn-github:hover {
-    background-color: #111;
-    color: white;
+/* LOGO */
+.footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #f0f0f8;
+    letter-spacing: -0.01em;
 }
 
-.text-name {
+.footer-logo-bracket {
     color: #6e42ca;
+}
+
+.footer-logo-accent {
+    color: #a67eec;
+}
+
+/* SOCIALS */
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-social-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    color: #555878;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.footer-social-btn:hover {
+    background: var(--social-color);
+    border-color: var(--social-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* COPYRIGHT */
+.footer-copy {
+    font-family: 'DM Sans', sans-serif;
+    color: #3a3d52;
+    font-size: 0.82rem;
+    margin: 0;
+}
+
+.footer-author {
+    color: #6e42ca;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-author:hover {
+    color: #a67eec;
 }
