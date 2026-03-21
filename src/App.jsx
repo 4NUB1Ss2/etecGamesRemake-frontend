@@ -16,6 +16,7 @@ function App() {
 
     return (
         <>
+            <Analytics/>
             <Navbar />
 
             <Routes>
@@ -27,7 +28,7 @@ function App() {
 
 
             </Routes>
-            <Analytics/>
+
             <Footer />
         </>
     )
