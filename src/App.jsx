@@ -15,7 +15,7 @@ function App() {
 
     return (
         <>
-            <Navbar />
+            <Navbar />ve
 
             <Routes>
                 <Route path="/" element={<Index />} />
