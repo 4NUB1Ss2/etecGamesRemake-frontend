@@ -5,6 +5,7 @@ import Index from './pages/Index'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import {Analytics} from "@vercel/analytics/react";
 
 
 
@@ -15,6 +16,7 @@ function App() {
 
     return (
         <>
+            <Analytics/>
             <Navbar />
 
             <Routes>
