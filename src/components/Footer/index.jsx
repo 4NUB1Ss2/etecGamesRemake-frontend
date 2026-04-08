@@ -1,10 +1,11 @@
 import './style.css'
-import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import { FaFacebookF, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import { FaXTwitter} from "react-icons/fa6";
 
 function Index() {
     const socials = [
         { icon: <FaFacebookF />, color: '#1877f2', link: '#', label: 'Facebook' },
-        { icon: <FaTwitter />,   color: '#1da1f2', link: '#', label: 'Twitter' },
+        { icon: <FaXTwitter />,   color: '#1da1f2', link: '#', label: 'Twitter' },
         { icon: <FaGoogle />,    color: '#ea4335', link: '#', label: 'Google' },
         { icon: <FaInstagram />, color: '#c13584', link: '#', label: 'Instagram' },
         { icon: <FaLinkedinIn />,color: '#0a66c2', link: '#', label: 'LinkedIn' },
