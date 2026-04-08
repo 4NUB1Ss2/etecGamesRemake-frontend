@@ -1,1 +1,74 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+.games-page {
+    background: #0f1117;
+    min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.games-header {
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+    border-bottom: 1px solid #1c1e2e;
+}
+
+.games-header-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(110, 66, 202, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.games-header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 48px;
+    padding-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.games-header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: #f0f0f8;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.games-header-sub {
+    font-family: 'DM Sans', sans-serif;
+    color: #555878;
+    font-size: 0.95rem;
+}
+
+.games-upload-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    background: #6e42ca;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.games-upload-btn:hover {
+    background: #5a32b0;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(110, 66, 202, 0.35);
+}
+
+/* ── LISTS ── */
+.games-lists {
+    padding-bottom: 60px;
+}
