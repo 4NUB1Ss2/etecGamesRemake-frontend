@@ -163,7 +163,7 @@ function Index() {
                         <div className="profile-games-header">
                             <h3 className="profile-games-title">🕹️ Jogos</h3>
                             {isOwner && (
-                                <button className="profile-add-btn">+ Adicionar jogo</button>
+                                <button className="profile-add-btn" onClick={() => navigate("/games/new")}>+ Adicionar jogo</button>
                             )}
                         </div>
                         <GameList
