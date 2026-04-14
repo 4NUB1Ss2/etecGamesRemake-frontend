@@ -9,11 +9,15 @@ function Index() {
     const navigate = useNavigate()
     const { isLoggedIn } = useAuth()
     const [me, setMe] = useState(null)
+    const [role, setRole] = useState('user') // student | professor | user
 
     useEffect(() => {
         if (isLoggedIn) {
             api.get('/me')
-                .then(res => setMe(res.data))
+                .then(res => {
+                    setMe(res.data)
+                    setRole(res.data.role)
+                })
                 .catch(() => {})
         } else {
             setMe(null)
@@ -31,9 +35,11 @@ function Index() {
                         <h1 className="games-header-title">Explorar Jogos</h1>
                         <p className="games-header-sub">Descubra projetos de alunos e professores de ETECs de todo o Brasil</p>
                     </div>
+                    {isLoggedIn && role !== 'user' &&(
                     <button className="games-upload-btn" onClick={() => {if (me.username) navigate(`/profile/${me.username}`)}}>
                         + Publicar jogo
                     </button>
+                    )}
                 </div>
             </div>
 
