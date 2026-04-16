@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
+import EditProfileModal from '../../components/EditProfileModal'
 import GameList from '../../components/GameList'
 import api from '../../services/api.js'
 import './style.css'
@@ -13,11 +14,12 @@ function Index() {
     const [me, setMe] = useState(null)
     const [loading, setLoading] = useState(true)
     const [isOwner, setIsOwner] = useState(false)
+    const [showEdit, setShowEdit] = useState(false)
 
     async function getUser() {
         try {
             const response = await api.get(`/users/${username}`)
-            setUser(response.data.user)
+            setUser(response.data)
         } catch {
             navigate('/404')
         }
@@ -98,10 +100,11 @@ function Index() {
                 {/* HEADER CARD */}
                 <div className="profile-header-card">
                     <div className="profile-avatar-wrapper">
-                        <img src={avatarUrl} alt={user.name} className="profile-avatar" />
-                        {isOwner && (
-                            <button className="profile-avatar-edit" title="Alterar foto">✏️</button>
-                        )}
+                        {console.log(user.image)}
+                        <img 
+                            src={user.image || avatarUrl} 
+                            alt={user.name} 
+                            className="profile-avatar" />
                     </div>
 
                     <div className="profile-header-info">
@@ -111,9 +114,24 @@ function Index() {
                                 <span className="profile-username">@{user.username}</span>
                             </div>
                             {isOwner && (
-                                <button className="profile-edit-btn">Editar perfil</button>
+                                <button className="profile-edit-btn" onClick={() => setShowEdit(true)}>
+                                    Editar perfil
+                                </button>
+                            )}
+
+                            {showEdit && (
+                                <EditProfileModal
+                                    user={user}
+                                    onClose={() => setShowEdit(false)}
+                                    onSave={(updatedUser) => {
+                                        setUser(updatedUser)
+                                        setShowEdit(false)
+                                    }}
+                                />
                             )}
                         </div>
+
+
 
                         <div className="profile-badges">
                             <span className="profile-badge profile-badge-role">
