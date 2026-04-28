@@ -72,13 +72,14 @@ function GameList({ title, section, username, emptyMessage }) {
                                             <div className="game-card-img">
                                                 <img src={game.image} alt={game.name} />
                                                 <div className="game-card-overlay">
+                                                    
                                                     <a
-                                                        href={game.link}
+                                                        onClick={() => navigate(`/games/${game.slug}`)}
                                                         target="_blank"
                                                         rel="noreferrer"
                                                         className="game-card-play"
                                                     >
-                                                        ▶ JOGAR
+                                                        ▶ VISUALIZAR
                                                     </a>
                                                 </div>
                                             </div>
@@ -87,9 +88,9 @@ function GameList({ title, section, username, emptyMessage }) {
                                                 <p className="game-card-description">{game.description}</p>
                                                 <button
                                                     className="game-card-btn"
-                                                    onClick={() => navigate(`/games/${game.name}`)}
+                                                    onClick={() => navigate(`/games/${game.slug}`)}
                                                 >
-                                                    BAIXAR
+                                                    VER
                                                 </button>
                                             </div>
                                         </div>

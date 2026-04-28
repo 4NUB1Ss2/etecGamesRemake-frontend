@@ -4,7 +4,7 @@ import api from '../../services/api.js'
 import './style.css'
 
 export default function Index() {
-    const { name } = useParams()
+    const { slug } = useParams()
     const navigate = useNavigate()
     const [game, setGame] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -12,14 +12,14 @@ export default function Index() {
     const [imgLoaded, setImgLoaded] = useState(false)
 
     useEffect(() => {
-        api.get(`/games/${name}`)
+        api.get(`/games/${slug}`)
             .then(res => setGame(res.data))
             .catch(() => setError('Jogo não encontrado'))
             .finally(() => setLoading(false))
-    }, [name])
+    }, [slug])
 
     function handlePlay() {
-        api.post(`/games/${name}/click`).catch(() => {})
+        api.post(`/games/${slug}/click`).catch(() => {})
         window.open(game.link, '_blank', 'noopener,noreferrer')
     }
 
@@ -37,7 +37,7 @@ export default function Index() {
         </div>
     )
 
-    const avatarLetter = game.user?.name?.charAt(0).toUpperCase() ?? '?'
+    const avatarLetter = game.creator_name.charAt(0).toUpperCase() ?? '?'
 
     return (
         <div className="gd-page">

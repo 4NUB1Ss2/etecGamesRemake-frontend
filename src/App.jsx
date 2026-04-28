@@ -28,7 +28,7 @@ function App() {
                 <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/games" element={<Games />} />
                 <Route path="/games/new" element={<AddGame />} />
-                <Route path="/games/:name" element={<ViewGame />} />
+                <Route path="/games/:slug" element={<ViewGame />} />
                 <Route path="*" element={<NotFound />} />
 
 

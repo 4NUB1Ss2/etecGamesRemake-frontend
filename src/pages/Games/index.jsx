@@ -45,8 +45,8 @@ function Index() {
 
             {/* GAME LISTS */}
             <div className="games-lists">
-                <GameList title="🕹️ Últimos Lançamentos"    section="last"    />
-                <GameList title="🔥 Mais Acessados"          section="clicks"  />
+                <GameList title="🕹️ Últimos Lançamentos" section="last"    />
+                <GameList title="🔥 Mais Acessados" section="clicks"  />
                 <GameList title="🔄 Atualizados Recentemente" section="last" />
             </div>
 

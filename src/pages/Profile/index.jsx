@@ -13,7 +13,7 @@ function Index() {
     const [user, setUser] = useState(null)
     const [me, setMe] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [isOwner, setIsOwner] = useState(false)
+    const isOwner = me && user ? me.username === user.username : false;
     const [showEdit, setShowEdit] = useState(false)
 
     async function getUser() {
@@ -29,7 +29,12 @@ function Index() {
         try {
             const response = await api.get('/me')
             setMe(response.data)
-        } catch {}
+        } catch(error) {
+            console.error("capoto o corsa ", error)
+
+        }
+        
+
     }
 
     useEffect(() => {
@@ -42,9 +47,8 @@ function Index() {
         load()
     }, [username])
 
-    useEffect(() => {
-        if (me && user) setIsOwner(me.username === user.username)
-    }, [me, user])
+    
+    
 
     function getRoleLabel(role) {
         if (role === 'student') return 'Aluno'
