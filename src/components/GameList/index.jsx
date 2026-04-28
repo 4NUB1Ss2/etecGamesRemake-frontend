@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import api from '../../services/api.js'
 import './style.css'
 
@@ -7,6 +8,7 @@ function GameList({ title, section, username, emptyMessage }) {
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(1)
     const [loading, setLoading] = useState(true)
+    const navigate  = useNavigate()
 
     async function getGames() {
         setLoading(true)
@@ -83,14 +85,12 @@ function GameList({ title, section, username, emptyMessage }) {
                                             <div className="game-card-body">
                                                 <h5 className="game-card-title">{game.name}</h5>
                                                 <p className="game-card-description">{game.description}</p>
-                                                <a
-                                                    href={game.link}
-                                                    target="_blank"
-                                                    rel="noreferrer"
+                                                <button
                                                     className="game-card-btn"
+                                                    onClick={() => navigate(`/games/${game.name}`)}
                                                 >
                                                     BAIXAR
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

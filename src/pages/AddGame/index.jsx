@@ -22,6 +22,15 @@ function Index() {
     const [dragging, setDragging] = useState(false)
     const [role, setRole] = useState(null) // student | professor | user
     const [me, setMe] = useState(null)
+    const errorRef = useRef(null)
+    const MAX_SIZE_MB = 2
+
+    useEffect(() => {
+        if (error) {
+            errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+    }, [error])
+
     useEffect(() => {
         setLoading(true)
             if (isLoggedIn) {
@@ -43,7 +52,19 @@ function Index() {
     }
 
     function handleFile(file) {
-        if (!file || !file.type.startsWith('image/')) return
+        if (!file ) return
+
+        if (!file.type.startsWith('image/')) {
+            setError('O arquivo deve ser uma imagem')
+            return
+        }
+        
+        setError(null)
+
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+            setError(`A imagem deve ser menor que ${MAX_SIZE_MB}MB`)
+            return
+        }
         setImage(file)
         setPreview(URL.createObjectURL(file))
     }
@@ -143,6 +164,7 @@ function Index() {
                                         <img src={preview} alt="preview" className="ag-preview" />
                                         <div className="ag-preview-overlay">
                                             <span>Clique para trocar</span>
+                                            
                                         </div>
                                     </>
                                 ) : (
@@ -212,7 +234,7 @@ function Index() {
                         </div>
 
                         {/* ERROR */}
-                        {error && <div className="ag-error">{error}</div>}
+                        {error && <div className="ag-error" ref={errorRef} >{error}</div>}
 
                         {/* SUBMIT */}
                         <div className="ag-submit-row">
