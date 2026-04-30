@@ -141,7 +141,7 @@ function Index() {
                             <span className="profile-badge profile-badge-role">
                                 {roleIcon} {roleLabel ?? 'Usuário'}
                             </span>
-                            {user.school && (
+                            {user.school && user.role !== 'user' && (
                                 <span className="profile-badge profile-badge-school">
                                     🏫 {user.school.name}
                                 </span>
