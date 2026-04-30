@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import api from '../services/api'
 
 const AuthContext = createContext()
 
@@ -10,6 +11,11 @@ export function AuthProvider({ children }) {
         setToken(newToken)
     }
 
+    async function loginWithGoogle(credential) {
+        const response = await api.post('/auth/google', { token: credential })
+        login(response.data.token)
+    }
+
     function logout() {
         localStorage.removeItem('token')
         setToken(null)
@@ -17,7 +23,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ token, login, logout, isLoggedIn: !!token }}>
+        <AuthContext.Provider value={{ token, login, loginWithGoogle , logout, isLoggedIn: !!token }}>
             {children}
         </AuthContext.Provider>
     )

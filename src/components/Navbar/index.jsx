@@ -46,9 +46,14 @@ export default function Navbar() {
                                 className="nav-btn nav-btn-ghost"
                                 onClick={() => { if (me?.username) navigate(`/profile/${me.username}`) }}
                             >
-                                <span className="nav-avatar">
-                                    {me?.name?.charAt(0).toUpperCase() ?? '?'}
-                                </span>
+                                {me?.image ? (
+                                    <img className="nav-avatar" src={me.image} alt={me.name} />
+                                ) : (
+                                    <span className="nav-avatar">
+                                        {me?.name?.charAt(0).toUpperCase() ?? '?'}
+                                    </span>
+                                )}
+
                                 <span className="nav-btn-label">Perfil</span>
                             </button>
                             <button className="nav-btn nav-btn-outline" onClick={logout}>

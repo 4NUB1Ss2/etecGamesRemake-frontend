@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ══════════════════════════════════════════════════
+   ETECGAMES — DESIGN TOKENS
+   Importe esse arquivo no seu index.css ou main.jsx
+   import './tokens.css'
+══════════════════════════════════════════════════ */
+
+:root {
+
+    /* ── CORES ── */
+    --bg:           #0f1117;   /* fundo principal */
+    --bg-deep:      #0a0b10;   /* fundo mais escuro (hero, featured) */
+    --surface:      #13151f;   /* cards, painéis */
+    --surface-2:    #1c1e2e;   /* borda, divisores */
+    --surface-3:    #2a2d3e;   /* hover de elementos internos */
+
+    --purple:       #6e42ca;   /* cor primária */
+    --purple-dark:  #5a32b0;   /* hover do primário */
+    --purple-light: #a67eec;   /* textos accent, badges */
+    --purple-faint: rgba(110, 66, 202, 0.12); /* backgrounds suaves */
+    --purple-glow:  rgba(110, 66, 202, 0.35); /* box-shadow */
+
+    --text:         #f0f0f8;   /* texto principal */
+    --text-muted:   #7b7f96;   /* texto secundário */
+    --text-faint:   #555878;   /* texto terciário */
+    --text-dim:     #3a3d52;   /* texto muito apagado */
+
+    --error:        #ff6b7a;
+    --error-bg:     rgba(220, 53, 69, 0.1);
+    --error-border: rgba(220, 53, 69, 0.3);
+
+    --success:      #4ade80;
+    --success-bg:   rgba(74, 222, 128, 0.1);
+
+    /* ── TIPOGRAFIA ── */
+    --font-display: 'Syne', sans-serif;
+    --font-body:    'DM Sans', sans-serif;
+
+    --text-xs:   0.72rem;
+    --text-sm:   0.82rem;
+    --text-base: 0.9rem;
+    --text-md:   1rem;
+    --text-lg:   1.2rem;
+    --text-xl:   1.5rem;
+    --text-2xl:  2rem;
+    --text-3xl:  clamp(2rem, 4vw, 3rem);
+    --text-hero: clamp(2.8rem, 6vw, 5rem);
+
+    /* ── ESPAÇAMENTO ── */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+    /* ── BORDAS ── */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 100px;
+
+    /* ── SOMBRAS ── */
+    --shadow-sm:  0 4px 16px rgba(0,0,0,0.3);
+    --shadow-md:  0 8px 24px rgba(0,0,0,0.4);
+    --shadow-lg:  0 16px 40px rgba(0,0,0,0.5);
+    --shadow-purple: 0 8px 24px var(--purple-glow);
+
+    /* ── TRANSIÇÕES ── */
+    --ease: 0.2s ease;
+    --ease-slow: 0.4s ease;
+
+    /* ── NAVBAR HEIGHT ── */
+    --navbar-h: 64px;
+}
+
+/* ══════════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════════ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font-body); }
+input, select, textarea { font-family: var(--font-body); }
+img { display: block; max-width: 100%; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+::selection { background: rgba(110,66,202,0.3); color: var(--text); }
