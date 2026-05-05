@@ -66,8 +66,9 @@ function Index() {
             const response = await api.post('/login', { credential: form.credential, password: form.password })
             login(response.data.token)
             navigate('/')
-        } catch {
-            setError('Usuário ou senha incorretos')
+        } catch (err) {
+
+          setError(err.response?.data?.message || 'Usuário ou senha incorretos')
         }
     }
 

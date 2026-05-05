@@ -59,6 +59,11 @@ export default function Navbar() {
                             <button className="nav-btn nav-btn-outline" onClick={logout}>
                                 Sair
                             </button>
+                            {me?.role === "admin" && ( 
+                              <a href="/admin" className="nav-btn nav-btn-primary">
+                                  Admin Panel
+                              </a>
+                            )}
                         </>
                     ) : (
                         <a href="/login" className="nav-btn nav-btn-primary">
