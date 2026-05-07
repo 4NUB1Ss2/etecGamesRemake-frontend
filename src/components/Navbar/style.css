@@ -151,3 +151,18 @@
     border-color: rgba(110, 66, 202, 0.3);
     color: #f0f0f8;
 }
+
+.nav-btn-admin {
+    background: rgba(110, 66, 202, 0.15);
+    color: #a67eec;
+    border: 1px solid rgba(110, 66, 202, 0.3);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+}
+
+.nav-btn-admin:hover {
+    background: rgba(110, 66, 202, 0.25);
+    color: #c4a0f5;
+    border-color: rgba(110, 66, 202, 0.5);
+}
