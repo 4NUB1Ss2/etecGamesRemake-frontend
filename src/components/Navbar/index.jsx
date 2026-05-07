@@ -42,6 +42,14 @@ export default function Navbar() {
                 <div className="navbar-actions">
                     {isLoggedIn ? (
                         <>
+                          {me?.role === 'admin' && (
+                              <button
+                                  className="nav-btn nav-btn-admin"
+                                  onClick={() => navigate('/admin')}
+                              >
+                                  ⚙ Admin
+                              </button>
+                          )}
                             <button
                                 className="nav-btn nav-btn-ghost"
                                 onClick={() => { if (me?.username) navigate(`/profile/${me.username}`) }}
@@ -59,11 +67,6 @@ export default function Navbar() {
                             <button className="nav-btn nav-btn-outline" onClick={logout}>
                                 Sair
                             </button>
-                            {me?.role === "admin" && ( 
-                              <a href="/admin" className="nav-btn nav-btn-primary">
-                                  Admin Panel
-                              </a>
-                            )}
                         </>
                     ) : (
                         <a href="/login" className="nav-btn nav-btn-primary">

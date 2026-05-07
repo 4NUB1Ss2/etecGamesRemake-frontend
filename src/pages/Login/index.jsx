@@ -53,7 +53,7 @@ function Index() {
         if (userType === 'etec') data.school_id = form.school_id
         try {
             const response = await api.post('/register', data)
-            login(response.data.token)
+            login(response.data.token, response.data.user.role)
             navigate('/')
         } catch (err) {
             setError(err.response?.data?.message || 'Erro ao criar conta')
@@ -64,7 +64,7 @@ function Index() {
         e.preventDefault()
         try {
             const response = await api.post('/login', { credential: form.credential, password: form.password })
-            login(response.data.token)
+            login(response.data.token, response.data.user.role)
             navigate('/')
         } catch (err) {
 
