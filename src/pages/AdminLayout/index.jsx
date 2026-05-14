@@ -3,18 +3,17 @@ import { useAuth } from '../../contexts/AuthContext'
 import './style.css'
 
 const NAV = [
-    { to: '/admin/users',   icon: '👤', label: 'Usuários'  },
-    { to: '/admin/games',   icon: '🎮', label: 'Jogos'     },
-    { to: '/admin/schools', icon: '🏫', label: 'Escolas'   },
+    { to: '/admin/users',      icon: '👤', label: 'Usuários'   },
+    { to: '/admin/games',      icon: '🎮', label: 'Jogos'      },
+    { to: '/admin/schools',    icon: '🏫', label: 'Escolas'    },
+    { to: '/admin/approvals',  icon: '✅', label: 'Aprovações' },
 ]
 
 export default function AdminLayout() {
     const { logout } = useAuth()
     const navigate   = useNavigate()
 
-  return (
-
-      
+    return (
         <div className="adm-root">
 
             {/* SIDEBAR */}
@@ -43,7 +42,12 @@ export default function AdminLayout() {
                     ))}
                 </nav>
 
-                
+                <div className="adm-sidebar-bottom">
+                    <button className="adm-nav-item adm-logout" onClick={logout}>
+                        <span className="adm-nav-icon">🚪</span>
+                        <span>Sair</span>
+                    </button>
+                </div>
             </aside>
 
             {/* MAIN */}

@@ -50,14 +50,27 @@ function Index() {
     async function handleRegister(e) {
         e.preventDefault()
         const data = { name: form.name, username: form.username, email: form.email, password: form.password, role: form.role }
-        if (userType === 'etec') data.school_id = form.school_id
-        try {
-            const response = await api.post('/register', data)
-            login(response.data.token, response.data.user.role)
-            navigate('/')
-        } catch (err) {
-            setError(err.response?.data?.message || 'Erro ao criar conta')
+        if (userType === 'etec')
+        {
+          try {
+              const response = await api.post('/register-etec', data)
+              login(response.data.token, response.data.user.role)
+              navigate('/verify')
+          } catch (err) {
+              setError(err.response?.data?.message || 'Erro ao criar conta')
+          }
         }
+        else {
+          try {
+              const response = await api.post('/register', data)
+              login(response.data.token, response.data.user.role)
+              navigate('/')
+          } catch (err) {
+              setError(err.response?.data?.message || 'Erro ao criar conta')
+          }          
+        }
+        
+        
     }
 
     async function handleLogin(e) {
@@ -65,7 +78,14 @@ function Index() {
         try {
             const response = await api.post('/login', { credential: form.credential, password: form.password })
             login(response.data.token, response.data.user.role)
-            navigate('/')
+
+            const user = response.data.user
+            if ((user.role === 'student' || user.role === 'professor') && !user.verified)
+            {
+              navigate('/verify')
+            } else {
+              navigate('/')
+            }
         } catch (err) {
 
           setError(err.response?.data?.message || 'Usuário ou senha incorretos')

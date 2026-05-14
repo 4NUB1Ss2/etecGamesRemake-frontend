@@ -1,11 +1,22 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import api from '../services/api'
 
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem('token'))
-    const [role, setRole] = useState(localStorage.getItem('role'))
+    const [role, setRole]   = useState(localStorage.getItem('role'))
+    const [me, setMe]       = useState(null)
+
+    useEffect(() => {
+        if (token) {
+            api.get('/me')
+                .then(res => setMe(res.data))
+                .catch(() => {})
+        } else {
+            setMe(null)
+        }
+    }, [token])
 
     function login(newToken, newRole) {
         localStorage.setItem('token', newToken)
@@ -24,11 +35,28 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('role')
         setToken(null)
         setRole(null)
+        setMe(null)
         window.location.href = '/'
     }
 
+    function isAdmin() {
+        return localStorage.getItem('role') === 'admin'
+    }
+
+    // precisa de verificação de email ou aprovação?
+    const needsVerification =
+        me &&
+        (me.role === 'student' || me.role === 'professor') &&
+        !(me.verified === 1 && me.aproved === 1)
+
     return (
-        <AuthContext.Provider value={{ token, role, login, loginWithGoogle , logout, isLoggedIn: !!token, isAdmin: role === 'admin' }}>
+        <AuthContext.Provider value={{
+            token, role, me, setMe,
+            login, loginWithGoogle, logout,
+            isLoggedIn: !!token,
+            isAdmin: role === 'admin',
+            needsVerification,
+        }}>
             {children}
         </AuthContext.Provider>
     )

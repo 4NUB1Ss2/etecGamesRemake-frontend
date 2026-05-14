@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import VerificationBanner from "./components/VerificationBanner";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
@@ -14,6 +15,8 @@ import AdminLayout from "./pages/AdminLayout"
 import AdminUsers from "./pages/AdminUsers"
 import AdminGames from "./pages/AdminGames"
 import AdminSchools from "./pages/AdminSchools"
+import AdminApprovals from "./pages/AdminApprovals";
+import Verify from "./pages/Verify";
 import { useAuth } from "./contexts/AuthContext";
 
 function AdminGuard({ children }) {
@@ -27,12 +30,14 @@ function App() {
     <>
       <Analytics />
       <Navbar />
+      <VerificationBanner />
 
       <main style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/verify" element={<Verify />} />
           
           <Route path="/games" element={<Games />} />
           <Route path="/games/new" element={<AddGame />} />
@@ -43,6 +48,7 @@ function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="games" element={<AdminGames />} />
             <Route path="schools" element={<AdminSchools />} />
+            <Route path="approvals" element={<AdminApprovals />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
