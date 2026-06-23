@@ -1,0 +1,31 @@
+.prof-approvals-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    padding-top: 4.2rem;
+}
+
+.prof-approvals-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.prof-approvals-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 .25rem;
+    letter-spacing: -.02em;
+}
+
+.prof-approvals-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: .875rem;
+    color: var(--text-muted);
+    margin: 0;
+}

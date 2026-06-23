@@ -30,7 +30,7 @@ export default function AdminApprovals() {
 
     async function handleApprove(username) {
         try {
-            await api.patch(`/admin/users/${username}`, { authorized: true })
+            await api.patch(`/admin/users/${username}`, { aproved: true })
             fetchPending()
         } catch {
             setError('Erro ao aprovar usuário')
@@ -39,7 +39,7 @@ export default function AdminApprovals() {
 
     async function handleReject(username) {
         try {
-            await api.patch(`/admin/users/${username}`, { authorized: false })
+            await api.patch(`/admin/users/${username}`, { aproved: false })
             fetchPending()
         } catch {
             setError('Erro ao rejeitar usuário')

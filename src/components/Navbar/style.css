@@ -129,7 +129,17 @@
     justify-content: center;
     flex-shrink: 0;
 }
-
+.nav-badge {
+    background: #6e42ca;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 100px;
+    padding: 1px 6px;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1.4;
+}
 /* ICON BUTTON */
 .nav-icon-btn {
     width: 36px;

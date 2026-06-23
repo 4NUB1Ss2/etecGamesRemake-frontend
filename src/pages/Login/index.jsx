@@ -53,7 +53,10 @@ function Index() {
         if (userType === 'etec')
         {
           try {
-              const response = await api.post('/register-etec', data)
+              const response = await api.post('/register-etec', {
+                    ...data,
+                    school_id: form.school_id
+                })
               login(response.data.token, response.data.user.role)
               navigate('/verify')
           } catch (err) {

@@ -10,14 +10,23 @@ export default function Navbar() {
     const navigate = useNavigate()
     const [me, setMe] = useState(null)
     const [scrolled, setScrolled] = useState(false)
+    const [pendingCount, setPendingCount] = useState(0)
 
     useEffect(() => {
         if (isLoggedIn) {
             api.get('/me')
-                .then(res => setMe(res.data))
+                .then(res => {
+                    setMe(res.data)
+                    if (res.data.role === 'professor') {
+                        api.get('/professor/approvals')
+                            .then(r => setPendingCount((r.data.data ?? r.data).length))
+                            .catch(() => {})
+                    }
+                })
                 .catch(() => {})
         } else {
             setMe(null)
+            setPendingCount(0)
         }
     }, [isLoggedIn])
 
@@ -42,14 +51,25 @@ export default function Navbar() {
                 <div className="navbar-actions">
                     {isLoggedIn ? (
                         <>
-                          {me?.role === 'admin' && (
-                              <button
-                                  className="nav-btn nav-btn-admin"
-                                  onClick={() => navigate('/admin')}
-                              >
-                                  ⚙ Admin
-                              </button>
-                          )}
+                            {me?.role === 'admin' && (
+                                <button
+                                    className="nav-btn nav-btn-admin"
+                                    onClick={() => navigate('/admin')}
+                                >
+                                    ⚙ Admin
+                                </button>
+                            )}
+                            {me?.role === 'professor' && (
+                                <button
+                                    className="nav-btn nav-btn-ghost"
+                                    onClick={() => navigate('/professor/approvals')}
+                                >
+                                    Aprovações
+                                    {pendingCount > 0 && (
+                                        <span className="nav-badge">{pendingCount}</span>
+                                    )}
+                                </button>
+                            )}
                             <button
                                 className="nav-btn nav-btn-ghost"
                                 onClick={() => { if (me?.username) navigate(`/profile/${me.username}`) }}

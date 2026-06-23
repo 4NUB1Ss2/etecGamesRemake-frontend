@@ -17,6 +17,7 @@ import AdminGames from "./pages/AdminGames"
 import AdminSchools from "./pages/AdminSchools"
 import AdminApprovals from "./pages/AdminApprovals";
 import Verify from "./pages/Verify";
+import ProfessorApprovals from "./pages/ProfessorApprovals";
 import { useAuth } from "./contexts/AuthContext";
 
 function AdminGuard({ children }) {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/professor/approvals" element={<ProfessorApprovals />} />
           
           <Route path="/games" element={<Games />} />
           <Route path="/games/new" element={<AddGame />} />
